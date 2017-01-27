@@ -22,6 +22,7 @@ script:
      PARAM="--limit master --tags common:setup" make --directory $roles_path play local
   - >
      sudo docker exec "$(cat ${container_id})"
+     PARAM="--limit master --tags common:setup" make --directory $roles_path play local
      | grep --quiet 'unreachable=0.*failed=0'
      && (echo 'Task idempotent state: PASSED' && exit 0)
      || (echo 'Task idempotent state: FAILED' && exit 1)
