@@ -1,3 +1,0 @@
----
-- name: restart service (chronyd)
-  service: name=chronyd state=restarted
