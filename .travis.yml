@@ -16,10 +16,10 @@ script:
      make --directory $roles_path install-ansible
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
-     PARAM="--limit master --tags common:setup" make --directory $roles_path play local
+     PARAM="--limit master --tags common:setup" make --directory $roles_path play local || :
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
-     PARAM="--limit master --tags common:setup" make --directory $roles_path play local
+     PARAM="--limit master --tags common:setup" make --directory $roles_path play local || :
   - >
      sudo docker exec "$(cat ${container_id})"
      env PARAM="--limit master --tags common:setup" make --directory $roles_path play local
