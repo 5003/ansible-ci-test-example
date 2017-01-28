@@ -2,9 +2,17 @@
 sudo: required
 env:
   - base_image: 5003/centos-ansible-ci:2.1.x
-    roles_path: /ci/
+  - base_image: 5003/centos-ansible-ci:2.1.x
+  - base_image: ubuntu:14.04
+  - base_image: ubuntu:16.04
+  - base_image: ubuntu:16.10
+  - base_image: ubuntu:17.04
+  - base_image: debian:7
+  - base_image: debian:8
+
 services: docker
 script:
+  - roles_path=/ci/
   - container_id=$(mktemp)
   - >
      sudo docker run --detach --privileged
