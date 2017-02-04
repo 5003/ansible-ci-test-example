@@ -20,7 +20,7 @@ script:
      ${base_image} > "${container_id}"
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
-     yum -y install make
+     yum -y install make wget
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
      make --directory $roles_path install-ansible
