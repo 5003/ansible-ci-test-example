@@ -1,13 +1,10 @@
 ---
 sudo: required
 env:
-  - base_image: 5003/systemd
-  - base_image: ubuntu:14.04
-  - base_image: ubuntu:16.04
-  - base_image: ubuntu:16.10
-  - base_image: ubuntu:17.04
-  - base_image: debian:7
-  - base_image: debian:8
+  - base_image: geerlingguy/docker-centos7-ansible
+  - base_image: geerlingguy/docker-ubuntu1404-ansible
+  - base_image: geerlingguy/docker-ubuntu1604-ansible
+  - base_image: geerlingguy/docker-debian8-ansible
 
 services: docker
 script:
@@ -20,7 +17,7 @@ script:
      ${base_image} > "${container_id}"
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
-     yum -y install make wget
+     yum -y install make wget || :
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
      make --directory $roles_path install-ansible
