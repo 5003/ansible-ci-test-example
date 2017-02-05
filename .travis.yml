@@ -2,9 +2,13 @@
 sudo: required
 env:
   - base_image: geerlingguy/docker-centos7-ansible
+    run_opts: /usr/sbin/init
   - base_image: geerlingguy/docker-ubuntu1404-ansible
+    run_opts: /sbin/init
   - base_image: geerlingguy/docker-ubuntu1604-ansible
+    run_opts: /sbin/init
   - base_image: geerlingguy/docker-debian8-ansible
+    run_opts: /sbin/init
 
 services: docker
 script:
@@ -14,7 +18,7 @@ script:
      sudo docker run --detach --privileged
      --volume="${PWD}":${roles_path}:ro
      --volume=/sys/fs/cgroup/:/sys/fs/cgroup/:ro
-     ${base_image} > "${container_id}"
+     ${base_image} ${run_opts} > "${container_id}"
   - >
      sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
      yum -y install make wget || :
